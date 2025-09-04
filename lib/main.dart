@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:cross_email/log/lifecycle_observer.dart';
 import 'package:cross_email/log/log_formatter.dart';
 import 'package:cross_email/log/log_output.dart';
-import 'package:cross_email/secrets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
@@ -31,9 +28,7 @@ void main(List<String> args) {
 
   Logger log = Logger("<main>");
 
-  StreamSubscription<LogRecord> logSubscription = Logger.root.onRecord.listen((
-    LogRecord record,
-  ) {
+  Logger.root.onRecord.listen((LogRecord record) {
     output.write(logFormatter(record));
     if (record.level >= minStackTraceLevel) {
       output.write(
